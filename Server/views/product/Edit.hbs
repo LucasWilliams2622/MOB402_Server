@@ -1,0 +1,177 @@
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <!-- Layout container -->
+        <div>
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="index.hbs" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <img src="/images/BagPagLogo.png" alt class="" width="200" height="150" />
+
+                        </span>
+                    </a>
+
+                    <a href="javascript:void(0);"
+                        class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item">
+                        <a href="MainStatistics.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    <!-- Components -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+                    <!-- Cards -->
+                    <li class="menu-item">
+                        <a href="Details.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Details</div>
+                        </a>
+                    </li>
+                    <!-- Forms & Tables -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp;
+                            Tables</span>
+                    </li>
+                    <!-- Forms -->
+                    <li class="menu-item active">
+                        <a href="Form.html" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-detail"></i>
+                            <div data-i18n="Form Layouts">Add and Edit Product </div>
+                        </a>
+
+                    </li>
+                    <!-- Tables -->
+                    <li class="menu-item">
+                        <a href="/cpanel/product/" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">Tables</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </aside>
+
+        </div>
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4" style="color: #f15a29;">
+                <span class="text-muted fw-light"></span>Edit Products
+            </h4>
+            <!-- Basic Layout & Basic with Icons -->
+            <div class="row">
+
+                <!-- Basic with Icons -->
+                <div class="col-xxl">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Fill form product</h5>
+
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" action="/cpanel/product/{{product._id}}/edit"
+                                enctype="multipart/form-data">
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label"
+                                        for="basic-icon-default-fullname">Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                    class="bx bx-user"></i></span>
+                                            <input name="name" type="text" class="form-control" value="{{product.name}}"
+                                                id="basic-icon-default-fullname" placeholder="Name Product"
+                                                aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label"
+                                        for="basic-icon-default-company">Price</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-company2" class="input-group-text"><i
+                                                    class="bx bx-buildings"></i></span>
+                                            <input name="price" type="text" id="basic-icon-default-company"
+                                                class="form-control" placeholder="Price." aria-label="ACME Inc."
+                                                aria-describedby="basic-icon-default-company2"
+                                                value="{{product.price}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Quantity
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-company2" class="input-group-text"><i
+                                                    class="bx bx-buildings"></i></span>
+                                            <input name="quantity" type="text" id="basic-icon-default-company"
+                                                class="form-control" placeholder="Quatity" aria-label="ACME Inc."
+                                                aria-describedby="basic-icon-default-company2"
+                                                value="{{product.quantity}}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-company">ChooseFile
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input id="imageUpload" onchange="displayImg(this)" name="image" type="file">
+                                        {{!-- onclick="$('#imageUpload').click()" --}}
+                                        <img  id="img" type="file"
+                                            src="{{product.image}}" width="100" height="100">
+                                    </div>
+
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Category
+                                    </label>
+                                    <select name="category">
+                                        {{#each categories}}
+                                        {{#if this.selected}}
+                                        <option selected value="{{this._id}}">{{this.name}} </option>
+                                        {{else}}
+                                        <option value="{{this._id}}">{{this.name}} </option>
+                                        {{/if}}
+                                        {{/each}}
+
+                                    </select>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Content -->
+
+
+    </div>
+    <!-- / Layout page -->
+</div>
+
+<script>
+    const displayImg = (input) => {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
